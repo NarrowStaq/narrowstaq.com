@@ -1,0 +1,89 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../config';
+
+const links = [
+  { href: '/#services', label: 'services' },
+  { href: '/#process', label: 'process' },
+  { href: '/#about', label: 'about' },
+  { href: '/#faq', label: 'faq' },
+];
+---
+
+<header class="nav">
+  <div class="container nav-inner">
+    <Logo />
+    <nav aria-label="Main">
+      <ul>
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href}>
+                <span class="tilde">~/</span>
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-cta" href={site.bookingUrl} target="_blank" rel="noopener" data-booking>
+      book a call
+    </a>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(8, 9, 12, 0.72);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    height: 68px;
+  }
+
+  ul {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav a {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  nav a:hover {
+    color: var(--text);
+  }
+
+  .tilde {
+    color: var(--text-dim);
+  }
+
+  .nav-cta {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  @media (max-width: 760px) {
+    nav {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,79 @@
+---
+import { site } from '../config';
+---
+
+<section class="section cta" id="contact">
+  <div class="container">
+    <div class="panel" data-reveal>
+      <p class="eyebrow">next step</p>
+      <h2>Let's talk about where your technology needs to go.</h2>
+      <p class="lede">
+        30 minutes, no pitch deck, no obligation. You'll leave with at least one useful idea, whether or not we work
+        together.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href={site.bookingUrl} target="_blank" rel="noopener" data-booking>
+          $ book --intro-call <span class="arrow">→</span>
+        </a>
+        <a class="btn btn-ghost" href={`mailto:${site.email}`}>{site.email}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .panel {
+    position: relative;
+    text-align: center;
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 5vw, 64px);
+    border: 1px solid var(--line-strong);
+    border-radius: 16px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 70% 90% at 50% 120%, rgba(255, 138, 61, 0.22), transparent 70%),
+      var(--bg-card);
+  }
+
+  /* Grid texture inside the panel */
+  .panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse at 50% 100%, #000, transparent 70%);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .panel > * {
+    position: relative;
+  }
+
+  .eyebrow {
+    justify-content: center;
+  }
+
+  h2 {
+    font-size: clamp(32px, 5vw, 56px);
+    max-width: 20ch;
+    margin-inline: auto;
+  }
+
+  .lede {
+    color: var(--text-muted);
+    font-size: 18px;
+    max-width: 52ch;
+    margin: 24px auto 0;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 40px;
+  }
+</style>

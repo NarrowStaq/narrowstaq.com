@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Not found · Narrowstaq">
+  <section class="container nf">
+    <p class="mono code">error 404</p>
+    <h1>That page isn't on the stack.</h1>
+    <p class="mono hint">$ cd <a href="/">~/</a></p>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    padding-block: 160px;
+    min-height: 60vh;
+  }
+  .code {
+    color: var(--accent);
+    font-size: 14px;
+  }
+  h1 {
+    font-size: clamp(36px, 6vw, 64px);
+    margin-top: 16px;
+  }
+  .hint {
+    color: var(--text-muted);
+    margin-top: 32px;
+  }
+  .hint a {
+    color: var(--accent);
+  }
+</style>

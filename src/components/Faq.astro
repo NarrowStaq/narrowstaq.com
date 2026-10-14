@@ -1,0 +1,113 @@
+---
+const faqs = [
+  {
+    q: 'What exactly is a fractional CTO?',
+    a: "An experienced technology executive who works with your company part-time, typically a set number of days or hours a month, on a retainer. You get CTO-level strategy, leadership, and accountability without the cost or commitment of a full-time executive hire.",
+  },
+  {
+    q: 'How much of your time do I get?',
+    a: "It depends on the stage and the need. Most engagements run between one and three days a week, with flexibility for crunch periods. We'll scope it together after the intro call.",
+  },
+  {
+    q: 'Do you work with my existing team or agency?',
+    a: "Yes, that's most of the job. I lead and support your in-house engineers, contractors, or agency partners, and help you decide over time which mix makes sense.",
+  },
+  {
+    q: 'Do you still write code?',
+    a: "When it's the highest-leverage thing to do, yes: prototypes, critical fixes, proofs of concept, and code reviews. But the goal is a team that ships without depending on me.",
+  },
+  {
+    q: 'How long do engagements last?',
+    a: "Assessments run a few weeks. Fractional CTO retainers usually last six months or more, often until the company is ready for a full-time CTO. At that point I help define the role and run the search.",
+  },
+  {
+    q: 'What does it cost?',
+    a: "Pricing depends on scope and time commitment, and is a fraction of a full-time executive's salary, equity, and benefits. Book an intro call and I'll give you a straight number.",
+  },
+];
+---
+
+<section class="section" id="faq">
+  <div class="container faq-grid">
+    <div>
+      <p class="eyebrow" data-reveal>faq</p>
+      <h2 class="section-title" data-reveal>Questions people ask first.</h2>
+    </div>
+
+    <div class="faqs">
+      {
+        faqs.map((f) => (
+          <details data-reveal>
+            <summary>
+              <span>{f.q}</span>
+              <span class="icon mono" aria-hidden="true">+</span>
+            </summary>
+            <p>{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+
+  .faqs {
+    border-top: 1px solid var(--line);
+  }
+
+  details {
+    border-bottom: 1px solid var(--line);
+  }
+
+  summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 0;
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:hover {
+    color: var(--accent);
+  }
+
+  .icon {
+    color: var(--accent);
+    font-size: 20px;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  details[open] .icon {
+    transform: rotate(45deg);
+  }
+
+  details p {
+    color: var(--text-muted);
+    padding-bottom: 26px;
+    max-width: 62ch;
+  }
+
+  @media (max-width: 960px) {
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

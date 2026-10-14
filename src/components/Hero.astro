@@ -1,0 +1,255 @@
+---
+import { site } from '../config';
+---
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="status mono">
+        <span class="dot" aria-hidden="true"></span>
+        taking on new clients
+      </p>
+      <h1>
+        Senior technical leadership,<br />
+        <span class="accent">without the full-time hire.</span>
+      </h1>
+      <p class="lede">
+        I work as a fractional CTO for startups and growing companies. I set the technical strategy, steady the team,
+        and make sure what you're building can carry the business, for a fraction of what a full-time executive
+        costs.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href={site.bookingUrl} target="_blank" rel="noopener" data-booking>
+          $ book --intro-call <span class="arrow">→</span>
+        </a>
+        <a class="btn btn-ghost" href="#services">see how I help</a>
+      </div>
+    </div>
+
+    <div class="terminal" aria-hidden="true">
+      <div class="term-bar">
+        <span></span><span></span><span></span>
+        <p class="mono">~/narrowstaq — zsh</p>
+      </div>
+      <pre class="term-body mono" id="term"></pre>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Types out a short "diagnostic" session. Shows everything at once for reduced motion.
+  const lines: [string, string][] = [
+    ['cmd', '$ narrowstaq audit --company=yours'],
+    ['dim', '  scanning architecture...'],
+    ['dim', '  reviewing team & process...'],
+    ['dim', '  checking roadmap vs. reality...'],
+    ['', ''],
+    ['warn', '  ⚠ no technical owner for key decisions'],
+    ['warn', '  ⚠ delivery slipping, cause unclear'],
+    ['warn', '  ⚠ vendor costs climbing'],
+    ['', ''],
+    ['cmd', '$ narrowstaq engage --fractional'],
+    ['ok', '  ✓ technical strategy aligned to business'],
+    ['ok', '  ✓ team shipping with confidence'],
+    ['ok', '  ✓ board-ready technical story'],
+    ['', ''],
+    ['cursor', '$ '],
+  ];
+
+  const el = document.getElementById('term');
+  if (el) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const render = (n: number, partial = '') => {
+      el.innerHTML = lines
+        .slice(0, n)
+        .map(([cls, text]) => `<span class="${cls}">${text}</span>`)
+        .join('\n');
+      if (partial) el.innerHTML += (n ? '\n' : '') + partial;
+    };
+
+    if (reduce) {
+      render(lines.length);
+    } else {
+      let i = 0;
+      const next = () => {
+        if (i >= lines.length) return;
+        const [cls, text] = lines[i];
+        if (cls === 'cmd') {
+          // Type commands character by character
+          let c = 0;
+          const type = () => {
+            c++;
+            render(i, `<span class="cmd">${text.slice(0, c)}</span><span class="caret">▍</span>`);
+            if (c < text.length) setTimeout(type, 28);
+            else {
+              i++;
+              setTimeout(next, 350);
+            }
+          };
+          type();
+        } else {
+          i++;
+          render(i);
+          setTimeout(next, cls === '' ? 120 : 260);
+        }
+      };
+      setTimeout(next, 500);
+    }
+  }
+</script>
+
+<style>
+  .hero {
+    padding-block: clamp(64px, 10vw, 120px) clamp(80px, 10vw, 128px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Warm glow behind the hero */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    max-width: 800px;
+    max-height: 800px;
+    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: clamp(40px, 6vw, 72px);
+    align-items: center;
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    padding: 6px 14px 6px 12px;
+    margin-bottom: 28px;
+    background: var(--bg-raised);
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 10px var(--green);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  h1 {
+    font-size: clamp(40px, 6.2vw, 72px);
+    letter-spacing: -0.035em;
+  }
+
+  .lede {
+    margin-top: 28px;
+    font-size: clamp(17px, 1.7vw, 20px);
+    color: var(--text-muted);
+    max-width: 52ch;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 40px;
+  }
+
+  .terminal {
+    background: var(--bg-card);
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    box-shadow:
+      0 30px 80px -20px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    overflow: hidden;
+  }
+
+  .term-bar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-raised);
+  }
+
+  .term-bar span {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--line-strong);
+  }
+
+  .term-bar p {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 12px;
+    color: var(--text-dim);
+    transform: translateX(-20px);
+  }
+
+  .term-body {
+    margin: 0;
+    padding: 20px 22px 24px;
+    font-size: 13.5px;
+    line-height: 1.75;
+    min-height: 420px;
+    white-space: pre-wrap;
+    color: var(--text);
+  }
+
+  .term-body :global(.cmd) {
+    color: var(--text);
+  }
+  .term-body :global(.dim) {
+    color: var(--text-dim);
+  }
+  .term-body :global(.warn) {
+    color: #f5c46b;
+  }
+  .term-body :global(.ok) {
+    color: var(--green);
+  }
+  .term-body :global(.cursor)::after,
+  .term-body :global(.caret) {
+    content: '▍';
+    color: var(--accent);
+    animation: blink 1s steps(1) infinite;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+    .term-body {
+      min-height: 0;
+      font-size: 12.5px;
+    }
+  }
+</style>

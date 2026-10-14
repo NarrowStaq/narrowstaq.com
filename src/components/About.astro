@@ -1,0 +1,184 @@
+---
+import { site } from '../config';
+
+// TODO: replace the placeholder bio and the facts in `profile` with your real background.
+const profile = [
+  ['name', 'Brandon Herbison'],
+  ['role', 'Fractional CTO, Founder'],
+  ['focus', 'Startups & growing SMBs'],
+  ['based', 'United States · remote-first'],
+  ['stack', 'Cloud, web, data, automation'],
+];
+
+const principles = [
+  ['Business first', "Technology decisions are business decisions. I explain the trade-offs in plain English so you can make the call."],
+  ['Candid', "You're paying for an honest read. If something's broken, including a plan you're attached to, you'll hear it from me."],
+  ['Built to hand off', 'Good leadership leaves the team stronger without me. Documentation, process, and people come before heroics.'],
+];
+---
+
+<section class="section" id="about">
+  <div class="container about-grid">
+    <div>
+      <p class="eyebrow" data-reveal>about</p>
+      <h2 class="section-title" data-reveal>An engineer who learned to lead, and still speaks both languages.</h2>
+      <div class="bio" data-reveal>
+        <p>
+          I started Narrowstaq to build software for growing businesses. Over time the work changed. Clients came to
+          me less for code and more for judgment: which platform to bet on, how to structure the team, whether the
+          agency was delivering, how to explain the technology to their board.
+        </p>
+        <p>
+          Now that is the work. I act as the technical leader for companies that need one but aren't ready for, or
+          don't need, a full-time executive. I'm still hands-on enough to read the code and talk shop with your
+          engineers, and senior enough to own the outcome alongside you.
+        </p>
+      </div>
+    </div>
+
+    <aside class="profile" data-reveal>
+      <div class="profile-head mono">
+        <span>cat profile.yml</span>
+      </div>
+      <dl class="mono">
+        {
+          profile.map(([k, v]) => (
+            <div>
+              <dt>{k}:</dt>
+              <dd>{v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <a class="profile-link mono" href={site.linkedin} target="_blank" rel="noopener">
+        linkedin.com/in/brandonherbison <span class="arrow">↗</span>
+      </a>
+    </aside>
+  </div>
+
+  <div class="container">
+    <div class="principles">
+      {
+        principles.map(([t, b], i) => (
+          <div class="principle" data-reveal style={`transition-delay:${i * 80}ms`}>
+            <h3>{t}</h3>
+            <p>{b}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: end;
+  }
+
+  .bio {
+    display: grid;
+    gap: 18px;
+    margin-top: 28px;
+    color: var(--text-muted);
+    font-size: 17.5px;
+    max-width: 62ch;
+  }
+
+  .profile {
+    background: var(--bg-card);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .profile-head {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--text-dim);
+    background: var(--bg-raised);
+  }
+
+  .profile-head span::before {
+    content: '$ ';
+    color: var(--accent);
+  }
+
+  dl {
+    margin: 0;
+    padding: 20px 22px 24px;
+    font-size: 14px;
+    display: grid;
+    gap: 10px;
+  }
+
+  dl div {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  dt {
+    color: var(--accent);
+    min-width: 6ch;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--text);
+  }
+
+  .profile-link {
+    display: block;
+    padding: 14px 22px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease;
+  }
+
+  .profile-link:hover {
+    color: var(--accent);
+    background: var(--bg-raised);
+  }
+
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 80px;
+    padding-top: 48px;
+    border-top: 1px dashed var(--line-strong);
+  }
+
+  .principle h3 {
+    font-size: 20px;
+  }
+
+  .principle h3::before {
+    content: '▸ ';
+    color: var(--accent);
+  }
+
+  .principle p {
+    color: var(--text-muted);
+    font-size: 15.5px;
+    margin-top: 10px;
+  }
+
+  @media (max-width: 960px) {
+    .about-grid,
+    .principles {
+      grid-template-columns: 1fr;
+    }
+    .principles {
+      gap: 28px;
+    }
+  }
+</style>

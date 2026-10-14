@@ -1,0 +1,128 @@
+---
+const steps = [
+  {
+    when: 'week 0',
+    title: 'Intro call',
+    body: "A free 30-minute conversation about where you are, what's in the way, and whether fractional leadership is the right fit. If it isn't, I'll tell you.",
+  },
+  {
+    when: 'weeks 1–4',
+    title: 'Assess',
+    body: 'I learn the business, the people, the code, and the infrastructure, then deliver a candid written assessment and a prioritized plan.',
+  },
+  {
+    when: 'months 2–3',
+    title: 'Stabilize',
+    body: 'We tackle the highest-leverage problems first: delivery process, critical risks, key hires, and runaway costs. You see momentum quickly.',
+  },
+  {
+    when: 'ongoing',
+    title: 'Lead & scale',
+    body: 'A steady cadence of leadership, with team 1:1s, roadmap ownership, and exec and board updates, until you are ready for a full-time CTO. Then I help you hire one.',
+  },
+];
+---
+
+<section class="section" id="process">
+  <div class="container">
+    <p class="eyebrow" data-reveal>how it works</p>
+    <h2 class="section-title" data-reveal>A clear path from "something's off" to a team that runs well.</h2>
+
+    <ol class="timeline">
+      {
+        steps.map((s, i) => (
+          <li data-reveal style={`transition-delay:${i * 90}ms`}>
+            <span class="node" aria-hidden="true" />
+            <span class="when mono">{s.when}</span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 72px 0 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    position: relative;
+  }
+
+  /* Connecting rail */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--line-strong) 40%, var(--line-strong));
+  }
+
+  li {
+    position: relative;
+    padding-top: 36px;
+  }
+
+  .node {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+  }
+
+  li:first-child .node {
+    background: var(--accent);
+    box-shadow: 0 0 14px var(--accent-glow);
+  }
+
+  .when {
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  h3 {
+    font-size: 22px;
+    margin-top: 8px;
+  }
+
+  p {
+    color: var(--text-muted);
+    font-size: 15.5px;
+    margin-top: 12px;
+  }
+
+  @media (max-width: 960px) {
+    .timeline {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding-left: 32px;
+    }
+    .timeline::before {
+      top: 0;
+      bottom: 0;
+      left: 6px;
+      right: auto;
+      width: 1px;
+      height: auto;
+      background: linear-gradient(180deg, var(--accent), var(--line-strong) 40%);
+    }
+    li {
+      padding-top: 0;
+    }
+    .node {
+      left: -32px;
+      top: 4px;
+    }
+  }
+</style>
